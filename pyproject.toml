@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "fisheye2pano"
+version = "0.1.0"
+description = ""
+license = "CC0-1.0"
+authors = ["Russell Valentine <russell.valentine@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10.12,<3.13"
+opencv-python = "^4.8.1.78"
+scipy = "^1.11.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
