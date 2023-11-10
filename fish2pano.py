@@ -14,9 +14,9 @@ def generate_pano(img_raw, radius, center, scale):
           width = int(scale * 2 * math.pi * radius + 0.5)
           height = int(scale * radius + 0.5)
         if you have a desired width or height size to find sacle:
-          scale = width/(2*scale*math.pi*radius)
+          scale = width/(2*math.pi*radius)
           OR
-          scale = height/(scale*radius)
+          scale = height/radius
     :return:
     """
     # w = int(2*math.pi*r+0.5)
