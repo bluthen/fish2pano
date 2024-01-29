@@ -4,7 +4,7 @@ poetry install
 poetry shell
 ```
 
-Make sure to compile optimized version of generate_pano, will probably be over 400 times faster.
+Make sure to compile optimized version of generate_pano, will probably be over 200 times faster.
 
 ```
 python setup.py build_ext --inplace
