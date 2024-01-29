@@ -4,6 +4,12 @@ poetry install
 poetry shell
 ```
 
+Make sure to compile optimized version of generate_pano, will probably be over 100 times faster.
+
+```
+python setup.py build_ext --inplace
+```
+
 # findcircle.py
 
 This users opencv UI to let you click the perimeter of the fish eye circle. Using the points it will find the radius and center.
