@@ -7,6 +7,7 @@ import cython
 import numpy as np
 
 from cython.cimports.libc.math import sin, cos, M_PI
+from cython.parallel import prange
 
 
 @cython.boundscheck(False)  # Deactivate bounds checking
@@ -42,7 +43,7 @@ def generate_pano(img_raw: cython.uchar[:, :, ::1], radius: cython.double, cente
     ix_: cython.Py_ssize_t
     iy_: cython.Py_ssize_t
     start = time.time()
-    for x in range(w):
+    for x in prange(w, nogil=True):
         theta = (2.0 * M_PI) * x / w
         for y in range(h):
             r_0 = radius * y / h

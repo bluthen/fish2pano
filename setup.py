@@ -11,6 +11,13 @@ setup(name='fish2pano',
       author_email="russ@coldstonelabs.org",
       url="http://coldstonelabs.org",
       py_modules=["fish2pano", "generate_pano", "findcircle.py"],
-      ext_modules=[Extension('generate_pano', ['generate_pano.py'],
-      include_dirs=[numpy.get_include()])]
+      ext_modules=[
+          Extension(
+              'generate_pano',
+              ['generate_pano.py'],
+              include_dirs=[numpy.get_include()],
+              extra_compile_args=['-fopenmp'],
+              extra_link_args=['-fopenmp']
+          )
+      ],
       )
