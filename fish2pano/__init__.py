@@ -1,5 +1,4 @@
 import sys
-import cv2
 import math
 import numpy as np
 import time
@@ -43,27 +42,26 @@ def generate_pano_pure(img_raw, radius, center, scale):
     return img_t
 
 
-def main():
-    # TODO: Interpolation
-    if len(sys.argv) < 6:
-        print("Usage: %s [image] [radius] [centerx,centery] [scale_factor] [outfile_name]" % (sys.argv[0],))
-        sys.exit(1)
-    imgfile = sys.argv[1]
-    radius = float(sys.argv[2])
-    center = [float(x) for x in sys.argv[3].split(',')]
-    scale = float(sys.argv[4])
-    outfile = sys.argv[5]
-    img_raw = cv2.imread(imgfile)
+def fish2pano(img_raw: np.ndarray, radius: float, center: list[int, int], scale: float):
+    """
+    Generate panoramic image.
+    :param img_raw: image to make pano from, uint8 numpy array with shape (w, h, 3)
+    :param radius: Radius of image circle in pixels
+    :param center: Center of image circle in pixels
+    :param scale: Scale image, end result image size is:
+          width = int(scale * 2 * math.pi * radius + 0.5)
+          height = int(scale * radius + 0.5)
+        if you have a desired width or height size to find sacle:
+          scale = width/(2*math.pi*radius)
+          OR
+          scale = height/radius
+    :return:
+    """
     try:
-        import generate_pano
-        img_t = generate_pano.generate_pano(img_raw, radius, np.array(center), scale)
+        import fast
+        img_t = fast.generate_pano(img_raw, radius, np.array(center, dtype=np.double), scale)
     except:
+        print("WARNING: Falling back to non-optimized slow version", file=sys.stderr)
         img_t = generate_pano_pure(img_raw, radius, center, scale)
-        print("WARNING: Non-optimized generate_pano", file=sys.stderr)
-    cv2.imshow('transformed', img_t)
-    cv2.waitKey()
-    cv2.imwrite(outfile, img_t)
+    return img_t
 
-
-if __name__ == '__main__':
-    main()

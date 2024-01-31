@@ -1,7 +1,4 @@
 # cython: language_level=3
-import sys
-import cv2
-import math
 import time
 import cython
 import numpy as np
