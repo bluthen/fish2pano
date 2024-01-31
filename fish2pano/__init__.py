@@ -1,5 +1,7 @@
 import sys
 import math
+import traceback
+
 import numpy as np
 import time
 
@@ -27,7 +29,6 @@ def generate_pano_pure(img_raw, radius, center, scale):
 
     for x in range(w):
         theta = (2.0 * math.pi) * x / w
-        ys = np.arange(0, h, 1)
         for y in range(h):
             r_0 = radius * y / h
             x_ = r_0 * math.cos(theta) + center[0]
@@ -58,9 +59,10 @@ def fish2pano(img_raw: np.ndarray, radius: float, center: list[int, int], scale:
     :return:
     """
     try:
-        import fast
-        img_t = fast.generate_pano(img_raw, radius, np.array(center, dtype=np.double), scale)
+        import fish2pano.fast
+        img_t = fish2pano.fast.generate_pano(img_raw, radius, np.array(center, dtype=np.double), scale)
     except:
+        traceback.print_exc()
         print("WARNING: Falling back to non-optimized slow version", file=sys.stderr)
         img_t = generate_pano_pure(img_raw, radius, center, scale)
     return img_t
