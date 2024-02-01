@@ -1,9 +1,11 @@
 # Install
 ```
-pip install
+pip install fish2pano
 ```
 
-Make sure to compile optimized version of generate_pano, will probably be over 200 times faster.
+## Inplace 
+
+If you are running in place from source from the repository, make sure to compile optimized version of generate_pano, will probably be over 200 times faster.
 
 ```
 python setup.py build --inplace
