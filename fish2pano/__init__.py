@@ -1,6 +1,7 @@
 import sys
 import math
 import traceback
+from typing import Tuple
 
 import numpy as np
 import time
@@ -43,7 +44,7 @@ def generate_pano_pure(img_raw, radius, center, scale):
     return img_t
 
 
-def fish2pano(img_raw: np.ndarray, radius: float, center: list[int, int], scale: float):
+def fish2pano(img_raw: np.ndarray, radius: float, center: Tuple[int, int], scale: float):
     """
     Generate panoramic image.
     :param img_raw: image to make pano from, uint8 numpy array with shape (w, h, 3)
