@@ -18,7 +18,7 @@ python setup.py build --inplace
 > radius = 481 # How big a circle your fisheye image is in pixels
 > center = [618, 538] # Center of your fisheye image
 > scale = 0.5 # How big the resulting pano is compared to the original
-> mypano = fish2pano(myimg, radius, center, scale) # numpy array of your new pano image 
+> mypano = fish2pano.fish2pano(myimg, radius, center, scale) # numpy array of your new pano image
 ```
 
 # Command Line and Graphical tools
