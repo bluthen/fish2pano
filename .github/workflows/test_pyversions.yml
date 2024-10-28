@@ -1,0 +1,18 @@
+on: [workflow_dispatch] 
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest']
+        python-version: ['3.7.17', '3.8.18', '3.9.18', '3.10.12', '3.11.8', '3.12.2']
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }} 
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run: pip install cython numpy setuptools 
+    - run: python setup.py build test

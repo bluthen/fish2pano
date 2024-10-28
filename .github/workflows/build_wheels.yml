@@ -1,0 +1,28 @@
+name: Build
+
+on: [workflow_dispatch]
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        arch: [x86_64, aarch64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU to emulate aarch64
+        if: matrix.arch == 'aarch64'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+      - name: Build aarch64 wheels
+        if: matrix.arch == 'aarch64'
+        run: echo 'CIBW_ARCHS_LINUX=aarch64' >> $GITHUB_ENV
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.16.5
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          path: ./wheelhouse/*.whl
