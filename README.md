@@ -1,3 +1,11 @@
+# DEPRECATED
+
+You should just use [OpenCV wrapPolar](https://docs.opencv.org/4.x/da/d54/group__imgproc__transform.html#ga49481ab24fdaa0ffa4d3e63d14c0d5e4) directly.
+
+See [issue #4](https://github.com/bluthen/fish2pano/issues/4)
+
+
+
 # Install deps
 ```
 poetry install
